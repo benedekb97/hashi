@@ -6,6 +6,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\ArchivableTrait;
 use App\Entity\Traits\ResourceTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\IslandRepository;
 
@@ -37,6 +39,16 @@ class Island implements IslandInterface
      * @ORM\ManyToOne(targetEntity="Game", cascade={"all"}, fetch="LAZY")
      */
     private ?GameInterface $game = null;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Connection", mappedBy="firstIsland")
+     */
+    private Collection $primaryConnections;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Connection", mappedBy="secondIsland")
+     */
+    private Collection $secondaryConnections;
 
     public function getPoint(): ?PointInterface
     {
@@ -76,5 +88,54 @@ class Island implements IslandInterface
     public function setGame(?GameInterface $game): void
     {
         $this->game = $game;
+    }
+
+    public function getConnectedIslands(): Collection
+    {
+        $islands = new ArrayCollection();
+
+        /** @var ConnectionInterface $connection */
+        foreach ($this->primaryConnections as $connection) {
+            if ($connection->getFirstIsland() === $this && !$islands->contains($connection->getSecondIsland())) {
+                $islands->add($connection->getSecondIsland());
+            } elseif ($connection->getSecondIsland() === $this && !$islands->contains($connection->getFirstIsland())) {
+                $islands->add($connection->getFirstIsland());
+            }
+        }
+
+        /** @var ConnectionInterface $connection */
+        foreach ($this->secondaryConnections as $connection) {
+            if ($connection->getFirstIsland() === $this && !$islands->contains($connection->getSecondIsland())) {
+                $islands->add($connection->getSecondIsland());
+            } elseif ($connection->getSecondIsland() === $this && !$islands->contains($connection->getFirstIsland())) {
+                $islands->add($connection->getFirstIsland());
+            }
+        }
+
+        return $islands;
+    }
+
+    public function isConnectedTo(IslandInterface $island): bool
+    {
+        return $this->getConnectedIslands()->contains($island);
+    }
+
+    public function getConnection(IslandInterface $island): ?ConnectionInterface
+    {
+        /** @var ConnectionInterface $connection */
+        foreach ($this->primaryConnections as $connection) {
+            if ($connection->getFirstIsland() === $this && $connection->getSecondIsland() === $island) {
+                return $connection;
+            }
+        }
+
+        /** @var ConnectionInterface $connection */
+        foreach ($this->secondaryConnections as $connection) {
+            if ($connection->getSecondIsland() === $this && $connection->getFirstIsland() === $island) {
+                return $connection;
+            }
+        }
+
+        return null;
     }
 }

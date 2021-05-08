@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Connection;
+use App\Entity\GameInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -12,39 +14,20 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Connection[]    findAll()
  * @method Connection[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ConnectionRepository extends ServiceEntityRepository
+class ConnectionRepository extends AbstractResourceRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Connection::class);
     }
 
-    // /**
-    //  * @return Connection[] Returns an array of Connection objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllForGame(GameInterface $game): array
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.firstIsland', 'firstIsland')
+            ->innerJoin('firstIsland.game', 'game', 'WITH', 'game = :game')
+            ->setParameter('game', $game)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Connection
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
