@@ -37,7 +37,7 @@ class Connection implements ConnectionInterface
         return $this->firstIsland;
     }
 
-    public function setFirstIsland(IslandInterface $island): void
+    public function setFirstIsland(?IslandInterface $island): void
     {
         $this->firstIsland = $island;
     }
@@ -47,7 +47,7 @@ class Connection implements ConnectionInterface
         return $this->secondIsland;
     }
 
-    public function setSecondIsland(IslandInterface $island): void
+    public function setSecondIsland(?IslandInterface $island): void
     {
         $this->secondIsland = $island;
     }

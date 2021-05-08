@@ -28,6 +28,15 @@ class IslandConnectionModifier implements IslandConnectionModifierInterface
             $connection = $first->getConnection($second);
 
             $connection->incrementCount();
+
+            $this->entityManager->persist($connection);
+
+            if ($connection->getCount() === 0) {
+                $first->removeConnection($connection);
+                $second->removeConnection($connection);
+
+                $this->entityManager->remove($connection);
+            }
         } else {
             $connection = $this->connectionFactory->createForIslands($first, $second);
 

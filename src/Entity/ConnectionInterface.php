@@ -14,11 +14,11 @@ interface ConnectionInterface extends ResourceInterface, ArchivableInterface
 
     public function getFirstIsland(): ?IslandInterface;
 
-    public function setFirstIsland(IslandInterface $island): void;
+    public function setFirstIsland(?IslandInterface $island): void;
 
     public function getSecondIsland(): ?IslandInterface;
 
-    public function setSecondIsland(IslandInterface $island): void;
+    public function setSecondIsland(?IslandInterface $island): void;
 
     public function getCount(): ?int;
 

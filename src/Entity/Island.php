@@ -138,4 +138,17 @@ class Island implements IslandInterface
 
         return null;
     }
+
+    public function removeConnection(ConnectionInterface $connection): void
+    {
+        if ($this->primaryConnections->contains($connection)) {
+            $this->primaryConnections->removeElement($connection);
+            $connection->setFirstIsland(null);
+        }
+
+        if ($this->secondaryConnections->contains($connection)) {
+            $this->secondaryConnections->removeElement($connection);
+            $connection->setSecondIsland(null);
+        }
+    }
 }

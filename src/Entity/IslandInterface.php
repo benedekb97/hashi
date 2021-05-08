@@ -31,4 +31,6 @@ interface IslandInterface extends ResourceInterface, ArchivableInterface
     public function isConnectedTo(IslandInterface $island): bool;
 
     public function getConnection(IslandInterface $island): ?ConnectionInterface;
+
+    public function removeConnection(ConnectionInterface $connection): void;
 }

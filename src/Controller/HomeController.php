@@ -46,6 +46,20 @@ class HomeController extends Controller
      */
     public function index(): Response
     {
+        $islands = $this->islandRepository->findAll();
+
+        $first = $islands[0];
+        $second = $islands[1];
+
+        if ($this->islandConnectabilityChecker->check($second, $first)) {
+            $this->islandConnectionModifier->connect($first, $second);
+
+            $this->entityManager->flush();
+        } else {
+            dd('not connectible!');
+        }
+
+
         return $this->render('index.html.twig');
     }
 }
