@@ -22,18 +22,6 @@ class ApiController extends Controller
 
     public function healthCheckAction(Request $request): Response
     {
-        $view = new UserView();
-
-        $view->email = 'lol';
-
-        $view->lastName = 'lol2';
-        $view->firstName = 'lol3';
-
-        $gameView = new GameView();
-
-        $gameView->user = $view;
-        $gameView->createdAt = new \DateTime();
-
-        return new JsonResponse($this->serialize($gameView));
+        return new JsonResponse();
     }
 }

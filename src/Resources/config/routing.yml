@@ -12,5 +12,5 @@ api_connection:
 
 api_index:
     path: /
-    methods: [GET]
+    methods: [GET, POST, PATCH, PUT, DELETE]
     controller: App\Controller\ApiController::healthCheckAction
