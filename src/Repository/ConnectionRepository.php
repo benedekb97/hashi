@@ -30,4 +30,14 @@ class ConnectionRepository extends AbstractResourceRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllByGameId(string $gameId): array
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.firstIsland', 'i')
+            ->innerJoin('i.game', 'g', 'WITH', 'g.id = :game')
+            ->setParameter('game', $gameId)
+            ->getQuery()
+            ->getResult();
+    }
 }

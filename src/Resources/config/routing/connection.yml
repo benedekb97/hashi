@@ -2,3 +2,8 @@ api_connection_create:
     path: /
     methods: [POST]
     controller: App\Controller\ConnectionController::createAction
+
+api_connection_index:
+    path: /
+    methods: [GET]
+    controller: App\Controller\ConnectionController::indexAction

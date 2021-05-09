@@ -15,10 +15,14 @@ class ConnectionViewFactory extends AbstractViewFactory
 
     private AxisViewFactory $axisViewFactory;
 
+    private ConnectionIslandViewFactory $connectionIslandViewFactory;
+
     public function __construct(
-        AxisViewFactory $axisViewFactory
+        AxisViewFactory $axisViewFactory,
+        ConnectionIslandViewFactory $connectionIslandViewFactory
     ){
         $this->axisViewFactory = $axisViewFactory;
+        $this->connectionIslandViewFactory = $connectionIslandViewFactory;
     }
 
     public function setPrimaryIsland(?IslandInterface $island): void
@@ -41,8 +45,8 @@ class ConnectionViewFactory extends AbstractViewFactory
                 ? $connection->getSecondIsland()->getId()
                 : $connection->getFirstIsland()->getId();
         } else {
-            $view->firstIslandId = $connection->getFirstIsland()->getId();
-            $view->secondIslandId = $connection->getSecondIsland()->getId();
+            $view->firstIsland = $this->connectionIslandViewFactory->create($connection->getFirstIsland());
+            $view->secondIsland = $this->connectionIslandViewFactory->create($connection->getSecondIsland());
         }
 
         $view->count = $connection->getCount();

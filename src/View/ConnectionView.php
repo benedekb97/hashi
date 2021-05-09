@@ -8,9 +8,9 @@ class ConnectionView extends View
 {
     public ?int $connectedIslandId = null;
 
-    public ?int $firstIslandId = null;
+    public ?ConnectionIslandView $firstIsland = null;
 
-    public ?int $secondIslandId = null;
+    public ?ConnectionIslandView $secondIsland = null;
 
     public ?int $count = null;
     

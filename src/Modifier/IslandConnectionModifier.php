@@ -29,12 +29,17 @@ class IslandConnectionModifier implements IslandConnectionModifierInterface
             $connection = $first->getConnection($second);
 
             $connection->incrementCount();
+            $first->setBridgeCount($first->getBridgeCount() + 1);
+            $second->setBridgeCount($second->getBridgeCount() + 1);
 
             $this->entityManager->persist($connection);
 
             if ($connection->getCount() === 0) {
                 $first->removeConnection($connection);
                 $second->removeConnection($connection);
+
+                $first->setBridgeCount($first->getBridgeCount() - 3);
+                $second->setBridgeCount($second->getBridgeCount() - 3);
 
                 $this->entityManager->remove($connection);
 
@@ -44,6 +49,8 @@ class IslandConnectionModifier implements IslandConnectionModifierInterface
             return $connection;
         } else {
             $connection = $this->connectionFactory->createForIslands($first, $second);
+            $first->setBridgeCount($first->getBridgeCount() + 1);
+            $second->setBridgeCount($second->getBridgeCount() + 1);
 
             $this->entityManager->persist($connection);
 

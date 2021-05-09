@@ -3,14 +3,13 @@
 {% block title %}Game{% endblock %}
 
 {% block body %}
-
+    <style>.number{font:bold 30px sans-serif;}</style>
+    <svg id="game" width="1000" height="1000"></svg>
 {% endblock %}
 
 {% block scripts %}
-<script src="/js/getIslandData.js"></script>
     <script>
-        getIslandData({{ game }});
-
-        setTimeout(function(){console.log(islandData);}, 1000);
+        let GAME_ID = {{ game }};
     </script>
+    <script src="/js/game.js"></script>
 {% endblock %}
