@@ -1,0 +1,14 @@
+api_island_index:
+    path: /
+    methods: [GET]
+    controller: App\Controller\IslandController::indexAction
+
+api_island_show:
+    path: /{id}
+    methods: [GET]
+    controller: App\Controller\IslandController:showAction
+
+api_island_connect:
+    path: /{id}
+    methods: [PATCH]
+    controller: App\Controller\IslandController:connectAction

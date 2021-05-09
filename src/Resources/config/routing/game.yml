@@ -1,0 +1,3 @@
+api_game_show:
+    path: /{id}
+    controller: App\Controller\GameController::showAction

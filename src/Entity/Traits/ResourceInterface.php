@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity\Traits;
 
+use App\Entity\EntityInterface;
 use DateTimeInterface;
 
-interface ResourceInterface
+interface ResourceInterface extends EntityInterface
 {
     public function getId(): ?int;
 

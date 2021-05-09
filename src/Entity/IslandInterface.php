@@ -10,6 +10,18 @@ use Doctrine\Common\Collections\Collection;
 
 interface IslandInterface extends ResourceInterface, ArchivableInterface
 {
+    public const DIRECTION_UP = 'up';
+    public const DIRECTION_DOWN = 'down';
+    public const DIRECTION_LEFT = 'left';
+    public const DIRECTION_RIGHT = 'right';
+
+    public const DIRECTION_MAP = [
+        self::DIRECTION_UP => 'Up',
+        self::DIRECTION_DOWN => 'Down',
+        self::DIRECTION_LEFT => 'Left',
+        self::DIRECTION_RIGHT => 'Right',
+    ];
+
     public function getPoint(): ?PointInterface;
 
     public function setPoint(PointInterface $point): void;
@@ -25,6 +37,8 @@ interface IslandInterface extends ResourceInterface, ArchivableInterface
     public function getGame(): ?GameInterface;
 
     public function setGame(?GameInterface $game): void;
+    
+    public function hasGame(): bool;
 
     public function getConnectedIslands(): Collection;
 

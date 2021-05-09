@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modifier;
 
+use App\Entity\ConnectionInterface;
 use App\Entity\IslandInterface;
 use App\Factory\ConnectionFactory;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +23,7 @@ class IslandConnectionModifier implements IslandConnectionModifierInterface
         $this->connectionFactory = $connectionFactory;
     }
 
-    public function connect(IslandInterface $first, IslandInterface $second): void
+    public function connect(IslandInterface $first, IslandInterface $second): ?ConnectionInterface
     {
         if ($first->isConnectedTo($second)) {
             $connection = $first->getConnection($second);
@@ -36,11 +37,17 @@ class IslandConnectionModifier implements IslandConnectionModifierInterface
                 $second->removeConnection($connection);
 
                 $this->entityManager->remove($connection);
+
+                return null;
             }
+
+            return $connection;
         } else {
             $connection = $this->connectionFactory->createForIslands($first, $second);
 
             $this->entityManager->persist($connection);
+
+            return $connection;
         }
     }
 }

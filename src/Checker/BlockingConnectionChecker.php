@@ -34,12 +34,15 @@ class BlockingConnectionChecker implements IslandConnectabilityCheckerInterface
 
         /** @var ConnectionInterface $connection */
         foreach ($connections as $connection) {
+            [$connectionMin, $connectionMax] = $this->getPositions($connection->getFirstIsland(), $connection->getSecondIsland());
+
             if (
                 $connection->getAxis()->getAxis() !== $targetAxis->getAxis() &&
                 $connection->getAxis()->getPosition() > $min &&
-                $connection->getAxis()->getPosition() < $max
+                $connection->getAxis()->getPosition() < $max &&
+                $targetAxis->getPosition() > $connectionMin &&
+                $targetAxis->getPosition() < $connectionMax
             ) {
-                dd('blocking');
                 return false;
             }
         }

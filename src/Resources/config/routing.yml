@@ -1,0 +1,16 @@
+api_game:
+    prefix: /games/
+    resource: "routing/game.yml"
+
+api_island:
+    prefix: /games/{gameId}/islands/
+    resource: "routing/island.yml"
+
+api_connection:
+    prefix: /games/{gameId}/connections/
+    resource: "routing/connection.yml"
+
+api_index:
+    path: /
+    methods: [GET]
+    controller: App\Controller\ApiController::healthCheckAction

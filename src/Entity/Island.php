@@ -90,6 +90,11 @@ class Island implements IslandInterface
         $this->game = $game;
     }
 
+    public function hasGame(): bool
+    {
+        return isset($this->game);
+    }
+
     public function getConnectedIslands(): Collection
     {
         $islands = new ArrayCollection();
@@ -150,5 +155,41 @@ class Island implements IslandInterface
             $this->secondaryConnections->removeElement($connection);
             $connection->setSecondIsland(null);
         }
+    }
+
+    public function getConnections(): Collection
+    {
+        $connections = new ArrayCollection();
+
+        /** @var ConnectionInterface $connection */
+        foreach ($this->primaryConnections as $connection) {
+            if (!$this->hasUniqueConnection($connections, $connection)) {
+                $connections->add($connection);
+            }
+        }
+
+        /** @var ConnectionInterface $connection */
+        foreach ($this->secondaryConnections as $connection) {
+            if (!$this->hasUniqueConnection($connections, $connection)) {
+                $connections->add($connection);
+            }
+        }
+
+        return $connections;
+    }
+
+    private function hasUniqueConnection(Collection $collection, ConnectionInterface $connection): bool
+    {
+        /** @var ConnectionInterface $con */
+        foreach ($collection as $con) {
+            if (
+                ($con->getFirstIsland() === $connection->getFirstIsland() && $con->getSecondIsland() === $connection->getSecondIsland()) ||
+                ($con->getFirstIsland() === $connection->getSecondIsland() && $con->getSecondIsland() === $connection->getFirstIsland())
+            ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

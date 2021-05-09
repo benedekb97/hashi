@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-interface AxisInterface
+interface AxisInterface extends EntityInterface
 {
     public const AXIS_HORIZONTAL = 'horizontal';
     public const AXIS_VERTICAL = 'vertical';

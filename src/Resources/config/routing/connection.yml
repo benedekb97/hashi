@@ -1,0 +1,4 @@
+api_connection_create:
+    path: /
+    methods: [POST]
+    controller: App\Controller\ConnectionController::createAction

@@ -28,6 +28,16 @@ class User implements UserInterface
      */
     private ?string $password = null;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $firstName = null;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $lastName = null;
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -49,7 +59,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
 
-        $roles[] = 'ROLE_USER';
+        $roles[] = self::ROLE_USER;
 
         return array_unique($roles);
     }
@@ -81,5 +91,25 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // DO NOTHING
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): void
+    {
+        $this->lastName = $lastName;
     }
 }

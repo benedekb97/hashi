@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Point;
 use App\Entity\PointInterface;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

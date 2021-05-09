@@ -25,4 +25,9 @@ trait UserAwareTrait
     {
         $this->user = $user;
     }
+
+    public function hasUser(): bool
+    {
+        return isset($this->user);
+    }
 }

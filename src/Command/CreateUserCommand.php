@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Entity\User;
+use App\Entity\UserInterface;
 use App\Repository\UserRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -53,6 +54,12 @@ class CreateUserCommand extends Command
         $user->setEmail($email);
         $user->setPassword($this->encoder->encodePassword($user, $email));
         $user->setCreatedAtNow();
+        $user->setRoles(
+            [
+                UserInterface::ROLE_USER,
+                UserInterface::ROLE_LOGGED_IN
+            ]
+        );
 
         $this->userRepository->add($user);
 
