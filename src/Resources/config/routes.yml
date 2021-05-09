@@ -1,0 +1,4 @@
+game_show:
+    path: /game/{id}
+    methods: [GET]
+    controller: App\Controller\ViewController:game

@@ -7,4 +7,7 @@ index:
 
 api:
     prefix: /api
-    resource: "../src/Resources/config/routing.yml"
+    resource: "../src/Resources/config/api.yml"
+
+views:
+    resource: "../src/Resources/config/routes.yml"

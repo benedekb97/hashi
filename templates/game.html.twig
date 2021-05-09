@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Game{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/js/getIslandData.js"></script>
+    <script>
+        getIslandData({{ game }});
+
+        setTimeout(function(){console.log(islandData);}, 1000);
+    </script>
+{% endblock %}

@@ -36,7 +36,7 @@ class Island implements IslandInterface
     private ?int $bridgeCount = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Game", cascade={"all"}, fetch="LAZY")
+     * @ORM\ManyToOne(targetEntity="Game", cascade={"all"}, fetch="LAZY", inversedBy="islands")
      */
     private ?GameInterface $game = null;
 

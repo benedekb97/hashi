@@ -11,7 +11,7 @@ use App\Entity\User;
 trait UserAwareTrait
 {
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="games")
      * @ORM\JoinColumn(name="user_id", nullable=true)
      */
     protected ?UserInterface $user = null;
