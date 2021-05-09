@@ -26,7 +26,7 @@ class Controller extends AbstractController
         $this->serializer = SerializerBuilder::create()->build();
     }
 
-    protected function serialize(View $view): array
+    protected function serialize($view): array
     {
         return json_decode(
             $this->serializer->serialize(

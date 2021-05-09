@@ -33,6 +33,7 @@ class GameViewFactory extends AbstractViewFactory
             $view->user = $this->userViewFactory->create($game->getuser());
         }
 
+        $view->id = $game->getId();
         $view->createdAt = $game->getCreatedAt();
         $view->updatedAt = $game->getUpdatedAt();
         $view->archivedAt = $game->getArchivedAt();

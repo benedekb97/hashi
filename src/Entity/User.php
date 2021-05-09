@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\ResourceTrait;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +39,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $lastName = null;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="user")
+     */
+    private Collection $games;
+
+    public function __construct()
+    {
+        $this->games = new ArrayCollection();
+    }
 
     public function getEmail(): ?string
     {
@@ -111,5 +123,10 @@ class User implements UserInterface
     public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
+    }
+
+    public function getGames(): Collection
+    {
+        return $this->games;
     }
 }

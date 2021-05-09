@@ -14,7 +14,7 @@ class RequestBodyDecoderSubscriber implements EventSubscriberInterface
     {
         $request = $event->getRequest();
 
-        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+        if (0 === strpos($request->headers->get('Content-Type') ?? '', 'application/json')) {
             $requestData = json_decode($request->getcontent(), true);
 
             $request->request->replace(is_array($requestData) ? $requestData : null);

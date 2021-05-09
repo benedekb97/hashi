@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\Traits\ResourceInterface;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
 interface UserInterface extends BaseUserInterface, ResourceInterface
@@ -28,4 +29,6 @@ interface UserInterface extends BaseUserInterface, ResourceInterface
     public function getLastName(): ?string;
 
     public function setLastName(?string $lastName): void;
+
+    public function getGames(): Collection;
 }

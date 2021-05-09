@@ -8,6 +8,8 @@ use DateTimeInterface;
 
 class GameView extends View
 {
+    public ?int $id = null;
+
     public ?UserView $user = null;
 
     public ?DateTimeInterface $createdAt = null;
