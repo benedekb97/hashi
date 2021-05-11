@@ -15,4 +15,6 @@ class ConnectionView extends View
     public ?int $count = null;
     
     public ?AxisView $axis = null;
+
+    public ?int $id = null;
 }

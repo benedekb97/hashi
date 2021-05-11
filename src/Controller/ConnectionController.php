@@ -103,4 +103,15 @@ class ConnectionController extends Controller
                 : Response::HTTP_OK
         );
     }
+
+    public function showAction(Request $request): Response
+    {
+        $connection = $request->get('id');
+
+        $connection = $this->connectionRepository->find($connection);
+
+        $view = $this->connectionViewFactory->create($connection);
+
+        return new JsonResponse($this->serialize($view), Response::HTTP_OK);
+    }
 }

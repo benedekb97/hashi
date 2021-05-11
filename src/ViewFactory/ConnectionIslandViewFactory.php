@@ -29,6 +29,7 @@ class ConnectionIslandViewFactory extends AbstractViewFactory
         $view = new ConnectionIslandView();
 
         $view->point = $this->pointViewFactory->create($island->getPoint());
+        $view->id = $island->getId();
 
         return $view;
     }

@@ -51,6 +51,7 @@ class ConnectionViewFactory extends AbstractViewFactory
 
         $view->count = $connection->getCount();
         $view->axis = $this->axisViewFactory->create($connection->getAxis());
+        $view->id = $connection->getId();
 
         return $view;
     }

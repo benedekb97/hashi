@@ -3,7 +3,23 @@
 {% block title %}Game{% endblock %}
 
 {% block body %}
-    <style>.number{font:bold 30px sans-serif;}</style>
+    <style>
+        .number{font:bold 30px sans-serif;}
+        .island:hover{
+            cursor:pointer;
+            opacity: 0.7;
+        }
+        .island{
+            stroke-opacity: 1;
+        }
+        .connection:hover{
+            opacity: 0.7;
+            cursor:pointer;
+        }
+        .connection{
+            stroke-opacity: 1;
+        }
+    </style>
     <svg id="game" width="1000" height="1000"></svg>
 {% endblock %}
 
